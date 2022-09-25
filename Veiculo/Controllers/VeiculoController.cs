@@ -19,5 +19,13 @@ namespace VeiculoAPI.Controllers
             veiculos.Add(veiculo);
             Console.WriteLine(veiculo.Marca);
         }
+
+        [HttpGet]
+        public IEnumerable<Veiculo> RecuperaVeiculo()
+        {
+
+            return veiculos;
+
+        }
     }
 }
