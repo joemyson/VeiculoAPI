@@ -8,6 +8,8 @@ namespace VeiculoAPI.Model
 {
     public class Veiculo
     {
+
+        public int Id { get; set; }
         [Required (ErrorMessage ="Campo  Obrigatorio")]
         public string Marca { get; set; }
         [Required(ErrorMessage = "Campo  Obrigatorio")]
