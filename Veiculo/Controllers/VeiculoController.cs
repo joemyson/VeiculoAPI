@@ -15,25 +15,31 @@ namespace VeiculoAPI.Controllers
         private static int id = 1;
 
         [HttpPost]
-        public void AdicionaVeiculo([FromBody]  Veiculo veiculo)
+        public IActionResult AdicionaVeiculo([FromBody]  Veiculo veiculo)
         {
             veiculo.Id = id++;
             veiculos.Add(veiculo);
-            Console.WriteLine(veiculo.Marca);
+            return CreatedAtAction(nameof(RecuperaVeiculoId), new { id = veiculo.Id }, veiculo);
         }
 
         [HttpGet]
-        public IEnumerable<Veiculo> RecuperaVeiculo()
+        public IActionResult RecuperaVeiculo()
         {
 
-            return veiculos;
+            return Ok(veiculos);
 
         }
         [HttpGet("{id}")]
-        public Veiculo RecuperaVeiculoId(int id)
+        public IActionResult RecuperaVeiculoId(int id)
         {
            
-                return veiculos.FirstOrDefault(veiculo => veiculo.Id==id);
+                Veiculo veiculo= veiculos.FirstOrDefault(veiculo => veiculo.Id==id);
+            if(veiculo != null)
+            {
+                return Ok(veiculo);
+            }
+
+            return NotFound();
       
         }
     }
